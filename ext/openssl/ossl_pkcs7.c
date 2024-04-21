@@ -226,8 +226,8 @@ ossl_pkcs7_s_sign(int argc, VALUE *argv, VALUE klass)
     VALUE ret;
 
     rb_scan_args(argc, argv, "32", &cert, &key, &data, &certs, &flags);
-    x509 = GetX509CertPtr(cert); /* NO NEED TO DUP */
-    pkey = GetPrivPKeyPtr(key); /* NO NEED TO DUP */
+    x509 = NIL_P(cert) ? NULL : GetX509CertPtr(cert); /* NO NEED TO DUP */
+    pkey = NIL_P(key) ? NULL : GetPrivPKeyPtr(key); /* NO NEED TO DUP */
     flg = NIL_P(flags) ? 0 : NUM2INT(flags);
     ret = NewPKCS7(cPKCS7);
 
